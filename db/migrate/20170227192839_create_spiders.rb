@@ -2,7 +2,7 @@ class CreateSpiders < ActiveRecord::Migration[5.0]
   def change
     create_table :spiders do |t|
       t.string :name
-      t.integer :user_id
+      t.string :password_digest
       t.string :type
       t.string :mood
       t.integer :level

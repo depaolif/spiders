@@ -7,6 +7,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get "/" do
+    @logged_in = logged_in?
     erb :index
   end
 
@@ -18,9 +19,14 @@ class ApplicationController < Sinatra::Base
     erb :login
   end
 
+  get "/logout" do
+    session.clear
+    redirect to "/"
+  end
+
   get "/account" do
     if session[:id]
-      @user = User.find(session[:id])
+      @spider = Spider.find(session[:id])
     else
       redirect '/nologin'
     end
@@ -30,6 +36,16 @@ class ApplicationController < Sinatra::Base
   get "/nologin" do
     # have page telling user they are not logged in
     erb :nologin
+  end
+
+  helpers do
+    def logged_in?
+      !!session[:id]
+    end
+
+    def current_user
+      Spider.find(session[:id])
+    end
   end
 
 end

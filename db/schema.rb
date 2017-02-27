@@ -10,38 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227200130) do
-
-  create_table "acquaintanceships", force: :cascade do |t|
-    t.integer "spider_id"
-    t.integer "acquaintance_id"
-  end
-
-  create_table "interests", force: :cascade do |t|
-    t.string "name"
-    t.text   "description"
-  end
-
-  create_table "spider_interests", force: :cascade do |t|
-    t.integer "spider_id"
-    t.integer "interest_id"
-  end
-
-  create_table "spiders", force: :cascade do |t|
-    t.string  "name"
-    t.integer "user_id"
-    t.string  "type"
-    t.string  "mood"
-    t.integer "level"
-    t.boolean "alive"
-    t.boolean "status"
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string  "username"
-    t.string  "password_digest"
-    t.string  "name"
-    t.integer "trainer_level"
-  end
+ActiveRecord::Schema.define(version: 0) do
 
 end
