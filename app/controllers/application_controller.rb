@@ -1,3 +1,5 @@
+require 'pry'
+
 class ApplicationController < Sinatra::Base
 
   configure do
@@ -15,6 +17,13 @@ class ApplicationController < Sinatra::Base
     erb :signup
   end
 
+  post "/signup" do
+    spider = Spider.create(params[:spider])
+    spider.update(level: 1, alive: true, mood: "happy to be alive")
+    session[:id] = spider.id
+    redirect to '/account'
+  end
+
   get "/login" do
     erb :login
   end
@@ -27,10 +36,10 @@ class ApplicationController < Sinatra::Base
   get "/account" do
     if session[:id]
       @spider = Spider.find(session[:id])
+      erb :account
     else
-      redirect '/nologin'
+      redirect to '/nologin'
     end
-    erb :account
   end
 
   get "/nologin" do

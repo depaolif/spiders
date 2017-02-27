@@ -5,13 +5,19 @@
     <title>Sign Up</title>
   </head>
   <body>
-    <h1>New Trainer</h1>
+    <h1>Welcome to the Web</h1>
     <br>
     <form action="/signup" method="post">
-      <h3>Username: <input type="text" name="user[username]" id="user_username"></h3>
-      <h3>Password: <input type="password" name="user[password]" id="user_password"></h3>
-      <h3>Trainer Name: <input type="text" name="user[name]" id="user_name"></h3>
-      <input type="submit" value="">
+      <h3><input type="text" name="spider[name]" id="spider_name" placeholder="Name"></h3>
+      <h3><input type="password" name="spider[password]" id="spider_password" placeholder="Password"></h3>
+      <br>
+      <h3>What kind of spider are you?</h3>
+      <input id="x1" type="radio" name="spider[spider_type]" value="sneaky"><label for="x1">SNEAKY</label>
+      <input id="x2" type="radio" name="spider[spider_type]" value="clever"><label for="x2">CLEVER</label>
+      <input id="x3" type="radio" name="spider[spider_type]" value="vicious"><label for="x3">VICIOUS</label>
+      <input id="x4" type="radio" name="spider[spider_type]" value="acrobatic"><label for="x4">ACROBATIC</label>
+      <br><br>
+      <input type="submit" value="Be A Spider">
     </form>
   </body>
 </html>
