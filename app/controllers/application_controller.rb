@@ -1,11 +1,13 @@
 require 'pry'
+require 'rack-flash'
 
 class ApplicationController < Sinatra::Base
-
   configure do
+    register Sinatra::ActiveRecordExtension
     set :views, "app/views"
     enable :sessions
     set :session_secret, "password_security"
+    use Rack::Flash
   end
 
   get "/" do
@@ -19,9 +21,14 @@ class ApplicationController < Sinatra::Base
 
   post "/signup" do
     spider = Spider.create(params[:spider])
-    spider.update(level: 1, alive: true, mood: "happy to be alive")
-    session[:id] = spider.id
-    redirect to '/account'
+    if spider.name && spider.spider_type && spider.password && spider.authenticate(params[:spider][:password])
+      spider.update(level: 1, alive: true, mood: "happy to be alive")
+      session[:id] = spider.id
+      redirect to '/newaccount'
+    else
+      flash[:message] = "A Spider needs a name, password, and type."
+      redirect to '/signup'
+    end
   end
 
   get "/login" do
@@ -45,6 +52,16 @@ class ApplicationController < Sinatra::Base
   get "/nologin" do
     # have page telling user they are not logged in
     erb :nologin
+  end
+
+  get "/newaccount" do
+    @spider = Spider.find(session[:id])
+    erb :new_account
+  end
+
+  patch "/update/:id" do
+    @spider = Spider.find(session[:id])
+
   end
 
   helpers do

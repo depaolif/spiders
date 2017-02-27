@@ -6,4 +6,5 @@ end
 
 # use UserController
 # use SpiderController
+use Rack::MethodOverride
 run ApplicationController

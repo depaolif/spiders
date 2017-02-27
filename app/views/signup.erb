@@ -5,6 +5,9 @@
     <title>Sign Up</title>
   </head>
   <body>
+    <% if flash[:message] %>
+      <p><%= flash[:message] %></p>
+    <% end %>
     <h1>Welcome to the Web</h1>
     <br>
     <form action="/signup" method="post">
