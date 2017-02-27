@@ -61,7 +61,15 @@ class ApplicationController < Sinatra::Base
 
   patch "/update/:id" do
     @spider = Spider.find(session[:id])
-
+    found_friend = Spider.find_by(name: params[:spider][:acquaintance])
+    binding.pry
+    if found_friend
+      @spider.acquaintances << found_friend
+    elsif params[:spider][:acquaintance] != ""
+      # no spider found by that name
+      flash[:message] = "We didn't find a spider by that name."
+      # add redirect to account, build out account
+    end
   end
 
   helpers do
